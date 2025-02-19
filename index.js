@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 
 // MongoDB Atlas connection string
-
+const mongoURI = process.env.MONGODB_URI;
 // Connect to MongoDB Atlas
 mongoose.connect(mongoURI)
   .then(() => console.log('Connected to MongoDB Atlas'))
