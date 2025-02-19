@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const app = express();
 const port = 3000;
 
@@ -20,6 +21,7 @@ const Todo = mongoose.model('Todo', todoSchema);
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Routes
