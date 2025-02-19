@@ -58,6 +58,4 @@ app.post('/delete', async (req, res) => {
 });
 
 // Start Server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+module.exports = app;
