@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 400px;
+      max-width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    /* Form Styles */
+    .add-todo-form {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .add-todo-form input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .add-todo-form input:focus {
+      border-color: #007bff;
+    }
+
+    .add-todo-form button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .add-todo-form button:hover {
+      background: #0056b3;
+    }
+
+    /* Todo List Styles */
+    .todo-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .todo-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .todo-item:hover {
+      background: #f1f1f1;
+    }
+
+    .todo-item .task {
+      flex: 1;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .todo-item .delete-btn {
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .todo-item .delete-btn:hover {
+      background: #cc0000;
+    }
+
+    /* No Todos Message */
+    .no-todos {
+      text-align: center;
+      color: #888;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Todo List</h1>
+    <form class="add-todo-form" action="/add" method="POST">
+      <input type="text" name="task" placeholder="Add a new task" required>
+      <button type="submit">Add</button>
+    </form>
+    <ul class="todo-list">
+      <% if (todos.length === 0) { %>
+        <li class="no-todos">No todos found. Add a new task!</li>
+      <% } else { %>
+        <% todos.forEach(todo => { %>
+          <li class="todo-item">
+            <span class="task"><%= todo.task %></span>
+            <form action="/delete" method="POST" style="display:inline;">
+              <input type="hidden" name="todoId" value="<%= todo._id %>">
+              <button type="submit" class="delete-btn">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      <% } %>
+    </ul>
+  </div>
+</body>
+</html>
